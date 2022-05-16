@@ -313,7 +313,7 @@
 													"top": 335,
 													"width": 119,
 													"height": 13,
-													"text": ":Clothing"
+													"text": ":sellingClothing"
 												},
 												{
 													"_type": "LabelView",
@@ -3477,7 +3477,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAwqnQGbEMPig="
 							},
-							"name": ":Clothing",
+							"name": ":sellingClothing",
 							"represent": {
 								"$ref": "AAAAAAGAxmKbqrGRi/Q="
 							},
@@ -3517,7 +3517,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGAwqnQGbELq4k="
 					},
-					"name": "Role1"
+					"name": "Role1",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -3581,7 +3582,8 @@
 								}
 							}
 						}
-					]
+					],
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -3672,7 +3674,8 @@
 								}
 							}
 						}
-					]
+					],
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -3736,7 +3739,8 @@
 								}
 							}
 						}
-					]
+					],
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -3838,7 +3842,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGAwqnQGbELq4k="
 					},
-					"name": "Role6"
+					"name": "Role6",
+					"type": ""
 				}
 			]
 		},

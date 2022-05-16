@@ -44,7 +44,7 @@
 												"$ref": "AAAAAAGAyBgBxg9dD0o="
 											},
 											"font": "Arial;13;0",
-											"left": 32.72998046875,
+											"left": 24.72998046875,
 											"top": 13,
 											"width": 200.6639404296875,
 											"height": 13,
@@ -57,7 +57,7 @@
 												"$ref": "AAAAAAGAyBgBxg9dD0o="
 											},
 											"font": "Arial;13;1",
-											"left": 13,
+											"left": 5,
 											"top": 13,
 											"width": 14.72998046875,
 											"height": 13,
@@ -65,7 +65,6 @@
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 8,
 									"top": 8,
 									"width": 1081,
 									"height": 753,
@@ -423,7 +422,7 @@
 													"top": 311,
 													"width": 151,
 													"height": 13,
-													"text": ":PurchasedClothings"
+													"text": ":PurchasedClothing"
 												},
 												{
 													"_type": "LabelView",
@@ -2214,7 +2213,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAyBgBxQ9bbJU="
 							},
-							"name": ":PurchasedClothings",
+							"name": ":PurchasedClothing",
 							"represent": {
 								"$ref": "AAAAAAGAyCbNfQ/d+TI="
 							},
