@@ -115,7 +115,7 @@
 													"top": 191,
 													"width": 90,
 													"height": 13,
-													"text": "Member"
+													"text": ":Member"
 												},
 												{
 													"_type": "LabelView",
@@ -212,7 +212,7 @@
 													"top": 183,
 													"width": 158,
 													"height": 13,
-													"text": "ShowSellingsUI"
+													"text": ":ShowSellingsUI"
 												},
 												{
 													"_type": "LabelView",
@@ -311,7 +311,7 @@
 													"top": 191,
 													"width": 150,
 													"height": 13,
-													"text": "ShowSellings"
+													"text": ":ShowSellings"
 												},
 												{
 													"_type": "LabelView",
@@ -408,7 +408,7 @@
 													"top": 519,
 													"width": 143,
 													"height": 13,
-													"text": "MemberInfo"
+													"text": ":MemberInfo"
 												},
 												{
 													"_type": "LabelView",
@@ -509,7 +509,7 @@
 													"top": 503,
 													"width": 159,
 													"height": 13,
-													"text": "Clothing"
+													"text": ":Clothing"
 												},
 												{
 													"_type": "LabelView",
@@ -2779,7 +2779,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAwj0vWsVbUjI="
 							},
-							"name": "Member",
+							"name": ":Member",
 							"represent": {
 								"$ref": "AAAAAAGAwj2v0MVsGN0="
 							},
@@ -2791,7 +2791,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAwj0vWsVbUjI="
 							},
-							"name": "ShowSellingsUI",
+							"name": ":ShowSellingsUI",
 							"represent": {
 								"$ref": "AAAAAAGAwj29v8WHOVE="
 							},
@@ -2803,7 +2803,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAwj0vWsVbUjI="
 							},
-							"name": "ShowSellings",
+							"name": ":ShowSellings",
 							"represent": {
 								"$ref": "AAAAAAGAwj3HdcWiJbM="
 							},
@@ -2815,7 +2815,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAwj0vWsVbUjI="
 							},
-							"name": "MemberInfo",
+							"name": ":MemberInfo",
 							"represent": {
 								"$ref": "AAAAAAGAwj5+MsW9fh4="
 							},
@@ -2827,7 +2827,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAwj0vWsVbUjI="
 							},
-							"name": "Clothing",
+							"name": ":Clothing",
 							"represent": {
 								"$ref": "AAAAAAGAwj6FCcXY71Y="
 							},

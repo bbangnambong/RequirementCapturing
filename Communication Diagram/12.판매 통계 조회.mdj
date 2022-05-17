@@ -118,7 +118,7 @@
 													"top": 159,
 													"width": 102,
 													"height": 13,
-													"text": "Member"
+													"text": ":Member"
 												},
 												{
 													"_type": "LabelView",
@@ -217,7 +217,7 @@
 													"top": 143,
 													"width": 166,
 													"height": 13,
-													"text": "ShowSellingSumUI"
+													"text": ":ShowSellingSumUI"
 												},
 												{
 													"_type": "LabelView",
@@ -316,7 +316,7 @@
 													"top": 159,
 													"width": 190,
 													"height": 13,
-													"text": "ShowSellingSum"
+													"text": ":ShowSellingSum"
 												},
 												{
 													"_type": "LabelView",
@@ -411,7 +411,7 @@
 													"top": 463,
 													"width": 174,
 													"height": 13,
-													"text": "MemberInfo"
+													"text": ":MemberInfo"
 												},
 												{
 													"_type": "LabelView",
@@ -508,7 +508,7 @@
 													"top": 479,
 													"width": 182,
 													"height": 13,
-													"text": "Clothing"
+													"text": ":Clothing"
 												},
 												{
 													"_type": "LabelView",
@@ -2540,7 +2540,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAwlxAke/dedM="
 							},
-							"name": "Member",
+							"name": ":Member",
 							"represent": {
 								"$ref": "AAAAAAGAwl2sxe/tpMQ="
 							},
@@ -2552,7 +2552,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAwlxAke/dedM="
 							},
-							"name": "ShowSellingSumUI",
+							"name": ":ShowSellingSumUI",
 							"represent": {
 								"$ref": "AAAAAAGAwl25JvAI9SA="
 							},
@@ -2564,7 +2564,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAwlxAke/dedM="
 							},
-							"name": "ShowSellingSum",
+							"name": ":ShowSellingSum",
 							"represent": {
 								"$ref": "AAAAAAGAwl3FZ/AjWxE="
 							},
@@ -2576,7 +2576,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAwlxAke/dedM="
 							},
-							"name": "MemberInfo",
+							"name": ":MemberInfo",
 							"represent": {
 								"$ref": "AAAAAAGAwmBNWPA+Wms="
 							},
@@ -2588,7 +2588,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAwlxAke/dedM="
 							},
-							"name": "Clothing",
+							"name": ":Clothing",
 							"represent": {
 								"$ref": "AAAAAAGAwmC+nPBZFFY="
 							},
@@ -2660,7 +2660,8 @@
 								}
 							}
 						}
-					]
+					],
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -2697,7 +2698,8 @@
 								}
 							}
 						}
-					]
+					],
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -2842,7 +2844,8 @@
 								}
 							}
 						}
-					]
+					],
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -2850,7 +2853,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGAwlxAke/ctY0="
 					},
-					"name": "Role4"
+					"name": "Role4",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -2858,7 +2862,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGAwlxAke/ctY0="
 					},
-					"name": "Role5"
+					"name": "Role5",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
