@@ -46,7 +46,7 @@
 											"font": "Arial;13;0",
 											"left": 24.72998046875,
 											"top": 5,
-											"width": 99.2236328125,
+											"width": 86.9385986328125,
 											"height": 13,
 											"text": "판매중 의류 조회"
 										},
@@ -414,7 +414,7 @@
 													"top": 503,
 													"width": 159,
 													"height": 13,
-													"text": ":Clothing"
+													"text": ":SellingClothing"
 												},
 												{
 													"_type": "LabelView",
@@ -2822,7 +2822,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAwj0vWsVbUjI="
 							},
-							"name": ":Clothing",
+							"name": ":SellingClothing",
 							"represent": {
 								"$ref": "AAAAAAGAwj6FCcXY71Y="
 							},

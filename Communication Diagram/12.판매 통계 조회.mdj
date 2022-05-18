@@ -46,7 +46,7 @@
 											"font": "Arial;13;0",
 											"left": 32.72998046875,
 											"top": 13,
-											"width": 86.2236328125,
+											"width": 75.693603515625,
 											"height": 13,
 											"text": "판매 통계 조회"
 										},
@@ -410,7 +410,7 @@
 													"top": 479,
 													"width": 182,
 													"height": 13,
-													"text": ":Clothing"
+													"text": ":PurchasedClothing"
 												},
 												{
 													"_type": "LabelView",
@@ -1994,7 +1994,7 @@
 											"height": 26,
 											"alpha": 0.17257794571186855,
 											"distance": 110.64357188738983,
-											"text": "2 *[For all member's clothings] : shwoClothingDetails( )",
+											"text": "2 *[For all member's clothings] : showClothingDetails( )",
 											"wordWrap": true
 										},
 										{
@@ -2504,7 +2504,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAwlxAke/dedM="
 							},
-							"name": "shwoClothingDetails",
+							"name": "showClothingDetails",
 							"source": {
 								"$ref": "AAAAAAGAwl3FZ/AkBgk="
 							},
@@ -2580,7 +2580,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAwlxAke/dedM="
 							},
-							"name": ":Clothing",
+							"name": ":PurchasedClothing",
 							"represent": {
 								"$ref": "AAAAAAGAwmC+nPBZFFY="
 							},
