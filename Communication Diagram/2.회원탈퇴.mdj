@@ -54,7 +54,7 @@
 													"font": "Arial;13;0",
 													"left": 32.72998046875,
 													"top": 5,
-													"width": 53,
+													"width": 45.97998046875,
 													"height": 13,
 													"text": "회원탈퇴"
 												},
@@ -965,7 +965,7 @@
 													"height": 13,
 													"alpha": 1.570795892012288,
 													"distance": 23,
-													"text": "2 : DeleteID()"
+													"text": "1.1 : DeleteID()"
 												},
 												{
 													"_type": "NodeLabelView",
@@ -1022,7 +1022,8 @@
 												"$ref": "AAAAAAGA01Be+PwVUFg="
 											}
 										}
-									]
+									],
+									"sequenceNumbering": "custom"
 								}
 							],
 							"messages": [
@@ -1041,7 +1042,8 @@
 									},
 									"connector": {
 										"$ref": "AAAAAAGA00zdxfgO8f0="
-									}
+									},
+									"sequenceNumber": "1"
 								},
 								{
 									"_type": "UMLMessage",
