@@ -2103,7 +2103,7 @@
 											"top": 284,
 											"width": 121.75439453125,
 											"height": 13,
-											"text": "sellingClothing"
+											"text": "SellingClothing"
 										},
 										{
 											"_type": "LabelView",
@@ -3070,7 +3070,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGAzHBL4I1bU6Y="
 					},
-					"name": "sellingClothing",
+					"name": "SellingClothing",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -3111,7 +3111,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGA1eAZKarbMYw="
 							},
-							"name": "sellerID"
+							"name": "sellerID",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3119,7 +3120,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGA1eAZKarbMYw="
 							},
-							"name": "name"
+							"name": "name",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3127,7 +3129,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGA1eAZKarbMYw="
 							},
-							"name": "manufacturer"
+							"name": "manufacturer",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3135,7 +3138,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGA1eAZKarbMYw="
 							},
-							"name": "price"
+							"name": "price",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3143,7 +3147,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGA1eAZKarbMYw="
 							},
-							"name": "stock"
+							"name": "stock",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3151,7 +3156,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGA1eAZKarbMYw="
 							},
-							"name": "avgRate"
+							"name": "avgRate",
+							"type": ""
 						}
 					],
 					"operations": [
