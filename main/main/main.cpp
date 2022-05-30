@@ -62,6 +62,17 @@ public:
   void listSoldoutClothings();
   void listPurchasedClothings();
   void listSoldClothings();
+
+  void setUserInfo(string n, string s, string i, string p) {
+      name = n; securityNumber = s; id = i; password = p;
+  };
+
+  bool checkID(string i, string p) {
+      if (i == id && p == password)
+          return ture;
+      else
+          return false;
+  }
 };
 
 // 함수 선언
@@ -109,11 +120,27 @@ void doTask(){
           }
           case 2:
           {
-            
+              deleteID();
             break;
           }
         }
       }
+      case 2:
+      {
+          switch (menu_level_2)
+          {
+            case 1:   
+            {
+              break;
+            }
+            case 2:
+            {
+              break;
+            }
+          }
+      }
+
+
       case 3:
       {
         switch(menu_level_2)
@@ -152,7 +179,7 @@ void doTask(){
   return;
 }
 
-
+//1.1 회원가입
 void join(){
   char user_type[MAX_STRING], name[MAX_STRING], SSN[MAX_STRING],
     address[MAX_STRING], ID[MAX_STRING], password[MAX_STRING];
@@ -161,11 +188,27 @@ void join(){
   fscanf(in_fp, "%s %s %s %s", name, SSN, ID, password);
 
    // 해당 기능 수행
-   
+  currentMember->setUserInfo(name, SSN, ID, password);
 
    // 출력 형식
   fprintf(out_fp, "1.1. 회원가입\n");
   fprintf(out_fp, "%s %s %s %s\n", name, SSN, ID, password);
+}
+
+//1.2 회원탈퇴
+void deleteID() {
+    delete currentMember;
+}
+
+//2.1 로그인
+void login() {
+    char ID[MAX_STRING], password[MAX_STRING];
+    fscanf(in_fp, "%s %s",ID, password);
+
+    if (currentMember->checkID(ID, password)) {
+
+    }
+
 }
 
 void createNewClothing(){
