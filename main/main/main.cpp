@@ -28,19 +28,56 @@ private:
   string name;
   string manufacturer;
   int price;
-  int sellerID;
+  string sellerID;
   float avgRate;
 public :
-  Clothing(string name_, string manufacturer_, int price_, int quantity_){
+  string getClothingDetails();
+  string getName(){
+    return name;
+  };
+  string getManufacturer(){
+    return manufacturer;
+  };
+  int getPrice(){
+    return price;
+  };
+  string getSellerID(){
+    return sellerID;
+  };
+  float getAvgRate(){
+    return avgRate;
+  };
+};
+
+// 판매중 의류 클래스
+class SellingClothing : public Clothing{
+private:
+  int stock;
+public:
+  Clothing(string name_, string manufacturer_, int price_, int stock_){
     name = name_;
     manufacturer = manufacturer_;
     price = price_;
-    quantity_ = quantity_;
     sellerID = currentMember->getID();
     avgRate = 0.0;
+    stock = stock_;
   }
   string getClothingDetails();
 };
+
+//판매완료 의류 클래스
+class SoldoutClothing : public Clothing{
+private:
+public:
+  SoldoutClothing(SellingClothing *sc){
+    name = sc->getName();
+    manufacturer = sc->getManufacturer();
+    price = sc->getPrice();;
+    sellerID = sc->getSellerID();
+    avgRate = sc->getAvgRate();
+  }
+};
+
 // 멤버 클래스
 class MemberInfo{
 private:
@@ -48,10 +85,10 @@ private:
   string securityNumber;
   string id;
   string password;
-  vector<Clothing> sellingClothings;
-  vector<Clothing> soldoutClothings;
-  vector<Clothing> purchasedClothings;
-  vector<Clothing> soldClothings;
+  vector<*Clothing> sellingClothings;
+  vector<*Clothing> soldoutClothings;
+  vector<*Clothing> purchasedClothings;
+  vector<*Clothing> soldClothings;
 public:
   string getName(){
     return name;
@@ -65,8 +102,8 @@ public:
   string getPassword(){
     return password;
   };
-  void addNewClothing(string clothingName, string manufacturer, int price, int quantity){
-    Clothing clothingTemp = *new Clothing(clothingName, manufacturer, price, quantity);
+  void addNewClothing(string clothingName, string manufacturer, int price, int stock){
+    SellingClothing *clothingTemp = new SellingClothing(clothingName, manufacturer, price, stock);
     sellingClothings.push_back(clothingTemp);
   };
   void listSellingClothings();
@@ -85,6 +122,26 @@ public:
           return false;
   }
 };
+
+//3.1. 의류 등록 UI와 Controller
+class AddClothingUI{
+public:
+  static void createNewClothing(string clothingName, string manufacturer, int price, int stock){
+    AddClothing::addNewClothing(name, manufacturer, price, stock);
+  }
+}
+class AddClothing{
+public:
+  static void addNewClothing(string clothingName, string manufacturer, int price, int stock){
+   currentMember->addNewClothing(name, manufacturer, price, stock);
+  }
+}
+
+//3.2. 판매중 의류 조회
+class ShowSellingUI{
+public:
+  static void 
+}
 
 // 4.1. 상품 정보 검색, 4.2. 상품 구매
 // 의류 검색하는 boundary class
@@ -248,15 +305,15 @@ void login() {
 
 }
 
-void createNewClothing(){
-  string name, manufacturer;
-  int price, quantity;
-  // 입력
-  in_fp >> name >> manufacturer >> price >> quantity;
-  // 현재 멤버의 selling list에 의류 등록
-  currentMember->addNewClothing(name, manufacturer, price, quantity);
-  // 출력
-  out_fp << "3.1. 판매 의류 등록\n" << name << " " << manufacturer << " " << price << " " << quantity << "\n";
+void addNewClothing(){
+    string name, manufacturer;
+    int price, stock;
+    // 입력
+    in_fp >> name >> manufacturer >> price >> stock;
+    // 현재 멤버의 selling list에 의류 등록
+    AddClothingUI::createNewClothing(name, manufacturer, price, stock);
+    // 출력
+    out_fp << "3.1. 판매 의류 등록\n" << name << " " << manufacturer << " " << price << " " << stock << "\n";
 }
 
 void program_exit(){
