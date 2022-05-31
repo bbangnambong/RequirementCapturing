@@ -5,11 +5,22 @@
 #include <vector>
 
 // 상수 선언
-// #define MAX_STRING 32
+#define MAX_STRING 32
 #define INPUT_FILE_NAME "input.txt"
 #define OUTPUT_FILE_NAME "output.txt"
 
 using namespace std;
+
+// 함수 선언
+void doTask();
+void join();
+void program_exit();
+
+// 변수 선언
+ifstream in_fp;
+ofstream out_fp;
+MemberInfo *currentMember;
+string clothingName;
 
 // 의류 클래스
 class Clothing{
@@ -37,10 +48,10 @@ private:
   string securityNumber;
   string id;
   string password;
-  vector<*Clothing> sellingClothings;
-  vector<*Clothing> soldoutClothings;
-  vector<*Clothing> purchasedClothings;
-  vector<*Clothing> soldClothings;
+  vector<Clothing> sellingClothings;
+  vector<Clothing> soldoutClothings;
+  vector<Clothing> purchasedClothings;
+  vector<Clothing> soldClothings;
 public:
   string getName(){
     return name;
@@ -64,16 +75,24 @@ public:
   void listSoldClothings();
 };
 
-// 함수 선언
-void doTask();
-void join();
-void program_exit();
+// 4.1. 상품 정보 검색
+// 의류 검색하는 boundary class
+class SearchClothingUI{
+public:
+    // static string clothingName;
+    static void searchClothing(){
+        in_fp >> clothingName;
+    }
+};
+// 의류 검색하는 control class
+class SearchClothing{
+public:
+    
+};
 
-// 변수 선언
-ifstream in_fp;
-ofstream out_fp;
-MemberInfo *currentMember;
 
+
+// main
 int main(){
   // 파일 입출력을 위한 초기화
   in_fp.open(INPUT_FILE_NAME);
@@ -120,7 +139,7 @@ void doTask(){
         {
           case 1:   // "3.1. 판매 의류 등록“ 메뉴 부분
           {
-            createNewClothing()
+              createNewClothing();
             break;
           }
           case 2:
@@ -135,6 +154,16 @@ void doTask(){
           }
         }
       }
+        case 4:
+        {
+            switch(menu_level_2){
+                case 1:
+                {
+                    SearchClothingUI::searchClothing();
+                    
+                }
+            }
+        }
       case 6:
       {
         switch(menu_level_2){
@@ -153,20 +182,20 @@ void doTask(){
 }
 
 
-void join(){
-  char user_type[MAX_STRING], name[MAX_STRING], SSN[MAX_STRING],
-    address[MAX_STRING], ID[MAX_STRING], password[MAX_STRING];
-
-   // 입력 형식 : 이름, 주민번호, ID, Password를 파일로부터 읽음
-  fscanf(in_fp, "%s %s %s %s", name, SSN, ID, password);
-
-   // 해당 기능 수행
-   
-
-   // 출력 형식
-  fprintf(out_fp, "1.1. 회원가입\n");
-  fprintf(out_fp, "%s %s %s %s\n", name, SSN, ID, password);
-}
+//void join(){
+//  char user_type[MAX_STRING], name[MAX_STRING], SSN[MAX_STRING],
+//    address[MAX_STRING], ID[MAX_STRING], password[MAX_STRING];
+//
+//   // 입력 형식 : 이름, 주민번호, ID, Password를 파일로부터 읽음
+//  fscanf(in_fp, "%s %s %s %s", name, SSN, ID, password);
+//
+//   // 해당 기능 수행
+//
+//
+//   // 출력 형식
+//  fprintf(out_fp, "1.1. 회원가입\n");
+//  fprintf(out_fp, "%s %s %s %s\n", name, SSN, ID, password);
+//}
 
 void createNewClothing(){
   string name, manufacturer;
