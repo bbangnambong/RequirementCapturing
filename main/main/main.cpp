@@ -6,6 +6,8 @@
 
 // 상수 선언
 #define MAX_STRING 32
+#define MAX_MEMBER 10
+#define MAX_CLOTHING 100
 #define INPUT_FILE_NAME "input.txt"
 #define OUTPUT_FILE_NAME "output.txt"
 
@@ -14,13 +16,10 @@ using namespace std;
 // 함수 선언
 void doTask();
 void join();
+void createNewClothingHelper();
+void showSellingsHelper();
+void showSoldoutsHelper();
 void program_exit();
-
-// 변수 선언
-ifstream in_fp;
-ofstream out_fp;
-MemberInfo *currentMember;
-string clothingName;
 
 // 의류 클래스
 class Clothing{
@@ -30,6 +29,8 @@ private:
   int price;
   string sellerID;
   float avgRate;
+  int stock;
+  int soldNum;
 public :
   string getClothingDetails();
   string getName(){
@@ -47,35 +48,50 @@ public :
   float getAvgRate(){
     return avgRate;
   };
-};
+  int getStock(){
+    return stock;
+  }
+  int getSoldNum(){
+    return soldNum;
+  }
+}clothingList[MAX_CLOTHING];
+
+int clothingNum = 0;
 
 // 판매중 의류 클래스
 class SellingClothing : public Clothing{
 private:
-  int stock;
 public:
-  Clothing(string name_, string manufacturer_, int price_, int stock_){
+  SellingClothing(string name_, string manufacturer_, int price_, int stock_){
     name = name_;
     manufacturer = manufacturer_;
     price = price_;
     sellerID = currentMember->getID();
     avgRate = 0.0;
     stock = stock_;
+    soldNum = 0;
   }
-  string getClothingDetails();
+  string getClothingDetails(){
+    string listString = name + " " + manufacturer + " " + to_string(price) + " " + to_string(stock);
+    return listString;
+  };
 };
 
 //판매완료 의류 클래스
 class SoldoutClothing : public Clothing{
 private:
 public:
-  SoldoutClothing(SellingClothing *sc){
+  SoldoutClothing(SellingClothing *sc){//판매할 때 stock이 0이 되면 이런식으로 생성해고 원래 있던 selling은 소멸
     name = sc->getName();
     manufacturer = sc->getManufacturer();
     price = sc->getPrice();;
     sellerID = sc->getSellerID();
     avgRate = sc->getAvgRate();
   }
+  string getClothingDetails(){
+    string listString = name + " " + manufacturer + " " + to_string(price) + " " + to_string(stock) + " " + to_string(avgRate);
+    return listString;
+  };
 };
 
 // 멤버 클래스
@@ -85,10 +101,9 @@ private:
   string securityNumber;
   string id;
   string password;
-  vector<*Clothing> sellingClothings;
-  vector<*Clothing> soldoutClothings;
-  vector<*Clothing> purchasedClothings;
-  vector<*Clothing> soldClothings;
+  vector<int> sellingClothings;
+  vector<int> soldoutClothings;
+  vector<int> purchasedClothings;
 public:
   string getName(){
     return name;
@@ -103,13 +118,21 @@ public:
     return password;
   };
   void addNewClothing(string clothingName, string manufacturer, int price, int stock){
-    SellingClothing *clothingTemp = new SellingClothing(clothingName, manufacturer, price, stock);
-    sellingClothings.push_back(clothingTemp);
+    clothingList[clothingNum] = SellingClothing(clothingName, manufacturer, price, stock);
+    sellingClothings.push_back(clothingNum++);
   };
-  void listSellingClothings();
-  void listSoldoutClothings();
+  vector<SellingClothing> listSellingClothings(){
+    return sellingClothings;
+  };
+  vector<SoldoutClothing> listSoldoutClothings(){
+    return soldoutClothings
+  };
   void listPurchasedClothings();
-  void listSoldClothings();
+  void listAllClothings(){
+    vector<int> allList = sellingClothings;
+    allList.insert(allList.end(), soldoutClothings.begin(), soldoutClothings.end());
+    return allList;
+  };
 
   void setUserInfo(string n, string s, string i, string p) {
       name = n; securityNumber = s; id = i; password = p;
@@ -123,25 +146,61 @@ public:
   }
 };
 
+// 변수 선언
+ifstream in_fp;
+ofstream out_fp;
+MemberInfo members[MAX_MEMBER];
+int memberNum = 0;
+MemberInfo *currentMember;
+string clothingName;
+
 //3.1. 의류 등록 UI와 Controller
 class AddClothingUI{
 public:
   static void createNewClothing(string clothingName, string manufacturer, int price, int stock){
     AddClothing::addNewClothing(name, manufacturer, price, stock);
   }
-}
+};
 class AddClothing{
 public:
   static void addNewClothing(string clothingName, string manufacturer, int price, int stock){
    currentMember->addNewClothing(name, manufacturer, price, stock);
   }
-}
+};
 
-//3.2. 판매중 의류 조회
-class ShowSellingUI{
+//3.2. 판매중 의류 조회 UI와 Controller
+class ShowSellingsUI{
 public:
-  static void 
-}
+  static void startInterface();
+};
+class ShowSellings{
+  static void showSellings(){
+    vector<int> sellingsList = currentMember->listSellingClothings();
+    string listString = "";
+    for(int i = 0; i < sellingsList.size(); i++){
+      listString += clothingList[sellingsList[i]].getClothingDetails() + "\n";
+    }
+    ShowSellingsUI::startInterface();
+    return listString;
+  }
+};
+
+//3.3. 판매 완료 의류 조회 UI와 Controller
+class ShowSoldoutsUI{
+public:
+  static void startInterface();
+};
+class ShowSoldouts{
+  static void showSellings(){
+    vector<int> soldoutsList = currentMember->listSoldoutClothings();
+    string listString = "";
+    for(int i = 0; i < soldoutsList.size(); i++){
+      listString += clothingList[soldoutsList[i]].getClothingDetails() + "\n";
+    }
+    ShowSoldoutsUI::startInterface();
+    return listString;
+  }
+};
 
 // 4.1. 상품 정보 검색, 4.2. 상품 구매
 // 의류 검색하는 boundary class
@@ -168,6 +227,25 @@ class ShowPurchaseHistroy{
     
 };
 
+//5.1. 판매 상품 통계 조회 UI와 Controller
+class ShowSellingSumUI{
+public:
+  static void startInterface();
+};
+class ShowSellingSum{
+  static void showSellingSum(){
+    vector<int> sellingSumList = currentMember->listSoldoutClothings();
+    string listString = "";
+    for(int i = 0; i < sellingSumList.size(); i++){
+      string name = clothingList[sellingSumList[i]].getName();
+      int price = clothingList[sellingSumList[i]].getPrice() * clothingList[sellingSumList[i]].getSoldNum;
+      float avgRate = clothingList[sellingSumList[i]].getAvgRate();
+      listString += name + " " + to_string(price) + " " + to_string(avgRate) + "\n";
+    }
+    ShowSellingSumUI::startInterface();
+    return listString;
+  }
+};
 // main
 int main(){
   // 파일 입출력을 위한 초기화
@@ -229,12 +307,12 @@ void doTask(){
         {
           case 1:   // "3.1. 판매 의류 등록“ 메뉴 부분
           {
-              // createNewClothing();
+            createNewClothingHelper();
             break;
           }
           case 2:
           {
-            
+            showSellingsHelper();
             break;
           }
           case 3:
@@ -244,16 +322,26 @@ void doTask(){
           }
         }
       }
-        case 4:
-        {
-            switch(menu_level_2){
-                case 1:
-                {
-                    SearchClothingUI::searchClothing();
-                    
-                }
-            }
-        }
+      case 4:
+      {
+          switch(menu_level_2){
+              case 1:
+              {
+                  SearchClothingUI::searchClothing();
+                  break;
+              }
+          }
+      }
+      case 5:
+      {
+          switch(menu_level_2){
+              case 1:
+              {
+                showSellingSumHelper();
+                 break; 
+              }
+          }
+      }
       case 6:
       {
         switch(menu_level_2){
@@ -305,7 +393,8 @@ void login() {
 
 }
 
-void addNewClothing(){
+//3.1. 의류 등록
+void createNewClothingHelper(){
     string name, manufacturer;
     int price, stock;
     // 입력
@@ -316,6 +405,23 @@ void addNewClothing(){
     out_fp << "3.1. 판매 의류 등록\n" << name << " " << manufacturer << " " << price << " " << stock << "\n";
 }
 
+//3.2. 판매중 의류 조회
+void showSellingsHelper(){
+    string sellingList = ShowSellings::showSellings();
+    out_fp << "3.2. 등록 상품 조회\n" << sellingList;
+}
+
+//3.3. 판매완료 의류 조회
+void soldoutSellingsHelper(){
+    string soldoutList = ShowSoldouts::showSellings();
+    out_fp << "3.3. 판매 완료 상품 조회\n" << soldoutList;
+}
+
+//5.1. 판매 상품 통계
+void showSellingSumHelper(){
+    string sumList = ShowSellings::showSellings();
+    out_fp << "5.1. 판매 완료 상품 조회\n" << sumList;
+}
 void program_exit(){
     
 }

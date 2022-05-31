@@ -2,8 +2,6 @@
     "files.associations": {
         "*.cpp": "cpp",
         "vector": "cpp",
-        "fstream": "cpp",
-        "locale": "cpp",
         "iosfwd": "cpp"
     }
 }
