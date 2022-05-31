@@ -66,16 +66,27 @@ public:
     return password;
   };
   void addNewClothing(string clothingName, string manufacturer, int price, int quantity){
-    Clothing *clothingTemp = new Clothing(clothingName, manufacturer, price, quantity);
+    Clothing clothingTemp = *new Clothing(clothingName, manufacturer, price, quantity);
     sellingClothings.push_back(clothingTemp);
   };
   void listSellingClothings();
   void listSoldoutClothings();
   void listPurchasedClothings();
   void listSoldClothings();
+
+  void setUserInfo(string n, string s, string i, string p) {
+      name = n; securityNumber = s; id = i; password = p;
+  };
+
+  bool checkID(string i, string p) {
+      if (i == id && p == password)
+          return true;
+      else
+          return false;
+  }
 };
 
-// 4.1. 상품 정보 검색
+// 4.1. 상품 정보 검색, 4.2. 상품 구매
 // 의류 검색하는 boundary class
 class SearchClothingUI{
 public:
@@ -87,10 +98,18 @@ public:
 // 의류 검색하는 control class
 class SearchClothing{
 public:
-    
+    void showClothing(){
+        out_fp <<"4.1. 상품 정보 검색";
+    }
 };
 
-
+// 4.3. 상품 구매 내역 조회, 상품 구매만족도 평가
+class ShowPurchaseHistroyUI{
+    
+};
+class ShowPurchaseHistroy{
+    
+};
 
 // main
 int main(){
@@ -109,9 +128,7 @@ void doTask(){
     
   while(!is_program_exit){
     // 입력파일에서 메뉴 숫자 2개를 읽기
-    fscanf(in_fp, "%d %d ", &menu_level_1, &menu_level_2);
-
-    
+      in_fp >> menu_level_1 >> menu_level_2;
     // 메뉴 구분 및 해당 연산 수행
     switch(menu_level_1)
     {
@@ -128,18 +145,34 @@ void doTask(){
           }
           case 2:
           {
-            
+             // deleteID();
             break;
           }
         }
       }
+      case 2:
+      {
+          switch (menu_level_2)
+          {
+            case 1:   
+            {
+              break;
+            }
+            case 2:
+            {
+              break;
+            }
+          }
+      }
+
+
       case 3:
       {
         switch(menu_level_2)
         {
           case 1:   // "3.1. 판매 의류 등록“ 메뉴 부분
           {
-              createNewClothing();
+              // createNewClothing();
             break;
           }
           case 2:
@@ -182,20 +215,38 @@ void doTask(){
 }
 
 
-//void join(){
-//  char user_type[MAX_STRING], name[MAX_STRING], SSN[MAX_STRING],
-//    address[MAX_STRING], ID[MAX_STRING], password[MAX_STRING];
-//
-//   // 입력 형식 : 이름, 주민번호, ID, Password를 파일로부터 읽음
-//  fscanf(in_fp, "%s %s %s %s", name, SSN, ID, password);
-//
-//   // 해당 기능 수행
-//
-//
-//   // 출력 형식
-//  fprintf(out_fp, "1.1. 회원가입\n");
-//  fprintf(out_fp, "%s %s %s %s\n", name, SSN, ID, password);
-//}
+//1.1 회원가입
+void join(){
+  char user_type[MAX_STRING], name[MAX_STRING], SSN[MAX_STRING],
+    address[MAX_STRING], ID[MAX_STRING], password[MAX_STRING];
+
+   // 입력 형식 : 이름, 주민번호, ID, Password를 파일로부터 읽음
+  fscanf(in_fp, "%s %s %s %s", name, SSN, ID, password);
+
+   // 해당 기능 수행
+  currentMember->setUserInfo(name, SSN, ID, password);
+
+   // 출력 형식
+  fprintf(out_fp, "1.1. 회원가입\n");
+  fprintf(out_fp, "%s %s %s %s\n", name, SSN, ID, password);
+}
+
+
+//1.2 회원탈퇴
+void deleteID() {
+    delete currentMember;
+}
+
+//2.1 로그인
+void login() {
+    char ID[MAX_STRING], password[MAX_STRING];
+    fscanf(in_fp, "%s %s",ID, password);
+
+    if (currentMember->checkID(ID, password)) {
+
+    }
+
+}
 
 void createNewClothing(){
   string name, manufacturer;
