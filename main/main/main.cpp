@@ -33,6 +33,10 @@ private:
   int soldNum;
 public :
   string getClothingDetails();
+  string clothingDetailsToUser();
+  string getSellerID(){
+    return sellerID;
+    }
   string getName(){
     return name;
   };
@@ -75,6 +79,10 @@ public:
     string listString = name + " " + manufacturer + " " + to_string(price) + " " + to_string(stock);
     return listString;
   };
+    string clothingDetailsToUser(){ // 4.1.을 위한 함수
+        string listString = getSellerID() +" "+getName() + " " + getManufacturer() + " " + getPrice() + " " + getStock()+" "+getAvgRate();
+        return listString;
+    }
 };
 
 //판매완료 의류 클래스
@@ -125,7 +133,7 @@ public:
     return sellingClothings;
   };
   vector<SoldoutClothing> listSoldoutClothings(){
-    return soldoutClothings
+    return soldoutClothings;
   };
   void listPurchasedClothings();
   void listAllClothings(){
@@ -153,7 +161,7 @@ MemberInfo members[MAX_MEMBER];
 int memberNum = 0;
 MemberInfo *currentMember;
 string clothingName;
-
+int search_index; // 검색 결과 인덱스 저장
 //3.1. 의류 등록 UI와 Controller
 class AddClothingUI{
 public:
@@ -203,21 +211,32 @@ class ShowSoldouts{
 };
 
 // 4.1. 상품 정보 검색, 4.2. 상품 구매
+// 의류 검색하는 control class
+class SearchAndPurchaseClothing{
+public:
+    static void searchClothing(){
+        out_fp <<"4.1. 상품 정보 검색";
+        int size=sizeof(clothingList)/sizeof(Clothing);
+        for(int i=0;i<size;i++){
+            if(in_fp==clothingList[i].getName()){
+                out_fp<<clothingList[i].clothingDetailsToUser();
+                search_index=i;
+            }
+        }
+    }
+    static void purchaseClothing(){
+        out_fp<<clothingList[search_index].getSellerID()<<" "<<clothingList[search_index].getName();
+        currentMember->purchasedClothings.push_back(clothingList[search_index]);
+    }
+};
 // 의류 검색하는 boundary class
 class SearchClothingUI{
 public:
-    // static string clothingName;
-    static void searchClothing(){
-        in_fp >> clothingName;
+    static void startInterface(){
+        SearchAndPurchaseClothing::searchClothing();
     }
 };
-// 의류 검색하는 control class
-class SearchClothing{
-public:
-    void showClothing(){
-        out_fp <<"4.1. 상품 정보 검색";
-    }
-};
+
 
 // 4.3. 상품 구매 내역 조회, 상품 구매만족도 평가
 class ShowPurchaseHistroyUI{
@@ -300,7 +319,6 @@ void doTask(){
           }
       }
 
-
       case 3:
       {
         switch(menu_level_2)
@@ -327,8 +345,11 @@ void doTask(){
           switch(menu_level_2){
               case 1:
               {
-                  SearchClothingUI::searchClothing();
+                  SearchClothingUI::startInterface();
                   break;
+              }
+              case 2:{
+                  SearchAndPurchaseClothing::purchaseClothing();
               }
           }
       }
@@ -416,7 +437,12 @@ void soldoutSellingsHelper(){
     string soldoutList = ShowSoldouts::showSellings();
     out_fp << "3.3. 판매 완료 상품 조회\n" << soldoutList;
 }
-
+//4.1. 상품 정보 검색
+void searchClotingHelper(){
+    string name;
+    in_fp >> name;
+    SearchClothingUI::startInterface()
+}
 //5.1. 판매 상품 통계
 void showSellingSumHelper(){
     string sumList = ShowSellings::showSellings();
