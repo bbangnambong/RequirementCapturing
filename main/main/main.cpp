@@ -28,15 +28,16 @@ private:
   string manufacturer;
   int price;
   string sellerID;
-  float avgRate;
   int stock;
   int soldNum;
 public :
+  float avgRate;
+  int numOfSelling=0; // 총 구매 횟수, 구매 만족도 평가에 사용
   string getClothingDetails();
   string clothingDetailsToUser();
   string getSellerID(){
     return sellerID;
-    }
+  }
   string getName(){
     return name;
   };
@@ -45,9 +46,6 @@ public :
   };
   int getPrice(){
     return price;
-  };
-  string getSellerID(){
-    return sellerID;
   };
   float getAvgRate(){
     return avgRate;
@@ -79,9 +77,9 @@ public:
     string listString = name + " " + manufacturer + " " + to_string(price) + " " + to_string(stock);
     return listString;
   };
-    string clothingDetailsToUser(){ // 4.1.을 위한 함수
-        string listString = getSellerID() +" "+getName() + " " + getManufacturer() + " " + getPrice() + " " + getStock()+" "+getAvgRate();
-        return listString;
+    
+    void clothingDetailsToUser(){ // 4.1.을 위한 함수
+        cout<< getSellerID()<<" "<<getName() << " " << getManufacturer() << " " << getPrice() << " " << getStock()<<" "<<getAvgRate()<<'\n';
     }
 };
 
@@ -92,7 +90,7 @@ public:
   SoldoutClothing(SellingClothing *sc){//판매할 때 stock이 0이 되면 이런식으로 생성해고 원래 있던 selling은 소멸
     name = sc->getName();
     manufacturer = sc->getManufacturer();
-    price = sc->getPrice();;
+    price = sc->getPrice();
     sellerID = sc->getSellerID();
     avgRate = sc->getAvgRate();
   }
@@ -101,7 +99,18 @@ public:
     return listString;
   };
 };
-
+// 구매한 의류 클래스
+class PurchasedClothing:public Clothing{
+    int sumOfRating=0; // 구매 만족도의 합
+public:
+    void showClothing(){
+        
+    }
+    void satisfactionAssessment(int rate){
+        sumOfRating++;
+        avgRate=sumOfRating/numOfSelling;
+    }
+}
 // 멤버 클래스
 class MemberInfo{
 private:
@@ -125,9 +134,12 @@ public:
   string getPassword(){
     return password;
   };
-  void addNewClothing(string clothingName, string manufacturer, int price, int stock){
+  void addNewClothing(string clothingName, string manufacturer, int price, intstock){
     clothingList[clothingNum] = SellingClothing(clothingName, manufacturer, price, stock);
     sellingClothings.push_back(clothingNum++);
+  };
+  void addPurchasedClothing(int index){
+      purchasedClothings.push_back(index); // 구매한 의류 인덱스 저장
   };
   vector<SellingClothing> listSellingClothings(){
     return sellingClothings;
@@ -135,7 +147,9 @@ public:
   vector<SoldoutClothing> listSoldoutClothings(){
     return soldoutClothings;
   };
-  void listPurchasedClothings();
+    void listPurchasedClothings(){
+        return purchasedClothings;
+    }
   void listAllClothings(){
     vector<int> allList = sellingClothings;
     allList.insert(allList.end(), soldoutClothings.begin(), soldoutClothings.end());
@@ -211,26 +225,27 @@ class ShowSoldouts{
 };
 
 // 4.1. 상품 정보 검색, 4.2. 상품 구매
-// 의류 검색하는 control class
+// 의류를 검색하고 구매할 수 있는 클래스
 class SearchAndPurchaseClothing{
 public:
-    static void searchClothing(){
-        out_fp <<"4.1. 상품 정보 검색";
+    static void searchClothing(){ // 검색을 하면 그 인덱스를 저장하여 구매할때 사용
+        out_fp <<"4.1. 상품 정보 검색"<<'\n';
         int size=sizeof(clothingList)/sizeof(Clothing);
         for(int i=0;i<size;i++){
             if(in_fp==clothingList[i].getName()){
-                out_fp<<clothingList[i].clothingDetailsToUser();
+                clothingList[i].clothingDetailsToUser();
                 search_index=i;
             }
         }
     }
     static void purchaseClothing(){
+        out_fp <<"4.2. 상품 구매"<<'\n';
         out_fp<<clothingList[search_index].getSellerID()<<" "<<clothingList[search_index].getName();
-        currentMember->purchasedClothings.push_back(clothingList[search_index]);
+        currentMember->addPurchasedClothing(search_index);
     }
 };
 // 의류 검색하는 boundary class
-class SearchClothingUI{
+class SearchAndPurchaseClothingUI{
 public:
     static void startInterface(){
         SearchAndPurchaseClothing::searchClothing();
@@ -238,12 +253,16 @@ public:
 };
 
 
-// 4.3. 상품 구매 내역 조회, 상품 구매만족도 평가
-class ShowPurchaseHistroyUI{
-    
-};
+// 4.3. 상품 구매 내역 조회, 4.4. 상품 구매만족도 평가
 class ShowPurchaseHistroy{
-    
+    static void purchasedClothing(){
+        
+    }
+};
+class ShowPurchaseHistroyUI{
+    static void startInterface(){
+        ShowPurchaseHistroy::purchasedClothing();
+    }
 };
 
 //5.1. 판매 상품 통계 조회 UI와 Controller
@@ -345,7 +364,7 @@ void doTask(){
           switch(menu_level_2){
               case 1:
               {
-                  SearchClothingUI::startInterface();
+                  SearchAndPurchaseClothingUI::startInterface();
                   break;
               }
               case 2:{
@@ -441,7 +460,7 @@ void soldoutSellingsHelper(){
 void searchClotingHelper(){
     string name;
     in_fp >> name;
-    SearchClothingUI::startInterface()
+    SearchAndPurchaseClothingUI::startInterface()
 }
 //5.1. 판매 상품 통계
 void showSellingSumHelper(){
