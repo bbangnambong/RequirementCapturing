@@ -31,10 +31,14 @@ private:
   int stock;
   int soldNum;
 public :
+  int sumOfRating=0; // 구매 만족도의 합
   float avgRate;
   int numOfSelling=0; // 총 구매 횟수, 구매 만족도 평가에 사용
   string getClothingDetails();
   string clothingDetailsToUser();
+    void setAvgRate(){
+        avgRate = sumOfRating / numOfSelling;
+    }
   string getSellerID(){
     return sellerID;
   }
@@ -78,7 +82,7 @@ public:
     return listString;
   };
     
-    void clothingDetailsToUser(){ // 4.1.을 위한 함수
+    void clothingDetailsToUser(){ // 4.1, 4.3을 위한 함수
         cout<< getSellerID()<<" "<<getName() << " " << getManufacturer() << " " << getPrice() << " " << getStock()<<" "<<getAvgRate()<<'\n';
     }
 };
@@ -103,6 +107,9 @@ public:
 class PurchasedClothing:public Clothing{
     int sumOfRating=0; // 구매 만족도의 합
 public:
+    PurchasedClothing(int index){
+        Clothing purchasedclothing[index]=clothingList[i];
+    }
     void showClothing(){
         
     }
@@ -226,13 +233,26 @@ class ShowSoldouts{
 
 // 4.1. 상품 정보 검색, 4.2. 상품 구매
 // 의류를 검색하고 구매할 수 있는 클래스
+
+class SearchAndPurchaseClothingUI{
+public:
+    static string startInterface(){
+        string goodsName;
+        in_fp >> goodsName;
+        return goodsName;
+    };
+};
 class SearchAndPurchaseClothing{
 public:
+    static string name;
+    static void requestInterface(){
+        name=SearchAndPurchaseClothingUI::startInterface();
+    }
     static void searchClothing(){ // 검색을 하면 그 인덱스를 저장하여 구매할때 사용
         out_fp <<"4.1. 상품 정보 검색"<<'\n';
         int size=sizeof(clothingList)/sizeof(Clothing);
         for(int i=0;i<size;i++){
-            if(in_fp==clothingList[i].getName()){
+            if(name==clothingList[i].getName()){
                 clothingList[i].clothingDetailsToUser();
                 search_index=i;
             }
@@ -244,27 +264,48 @@ public:
         currentMember->addPurchasedClothing(search_index);
     }
 };
-// 의류 검색하는 boundary class
-class SearchAndPurchaseClothingUI{
-public:
-    static void startInterface(){
-        SearchAndPurchaseClothing::searchClothing();
-    }
-};
-
 
 // 4.3. 상품 구매 내역 조회, 4.4. 상품 구매만족도 평가
-class ShowPurchaseHistroy{
-    static void purchasedClothing(){
+class ShowPurchaseHistroyUI{
+public:
+    static string name,rating;
+    static void startInterface(){
         
     }
-};
-class ShowPurchaseHistroyUI{
-    static void startInterface(){
-        ShowPurchaseHistroy::purchasedClothing();
+    static string getGoodsName(){
+        string name;
+        in_fp>>name;
+        return name;
+    }
+    static string getRating(){
+        string rating;
+        in_fp>>rating;
+        return rating;
     }
 };
-
+class ShowPurchaseHistroy{
+public:
+    static string name,rating;
+    static void showpurchasedClothings(){
+        out_fp <<"4.3. 상품 구매 내역 조회"<<'\n';
+        for(int i=0;currentMember->purchasedClothings.size();i++){
+            int idx=currentMember->purchasedClothings[i]; // 구매한 의류의 인덱스를 가져와서
+            clothingList[idx].clothingDetailsToUser(); // 출력한다.
+        }
+    }
+    static void satisfactionAssessment(){
+        out_fp <<"4.4. 상품 구매만족도 평가"<<'\n';
+        name=ShowPurchaseHistroyUI::getGoodsName();
+        rating=ShowPurchaseHistroyUI::getRating();
+        int size=sizeof(clothingList)/sizeof(Clothing); // 상품 찾기
+        for(int i=0;i<size;i++){
+            if(name==clothingList[i].getName()){
+                clothingList[i].sumOfRating += rating; // 구매만족도 더함
+                clothingList[i].setAvgRate(); // 평균 변경함
+            }
+        }
+    }
+};
 //5.1. 판매 상품 통계 조회 UI와 Controller
 class ShowSellingSumUI{
 public:
@@ -364,11 +405,18 @@ void doTask(){
           switch(menu_level_2){
               case 1:
               {
-                  SearchAndPurchaseClothingUI::startInterface();
+                  SearchAndPurchaseClothing::searchClothing();
                   break;
               }
               case 2:{
                   SearchAndPurchaseClothing::purchaseClothing();
+                  break;
+              }
+              case 3:{
+                  ShowPurchaseHistroy::showpurchasedClothings();
+              }
+              case 4:{
+                  ShowPurchaseHistroy::satisfactionAssessment();
               }
           }
       }
@@ -458,8 +506,8 @@ void soldoutSellingsHelper(){
 }
 //4.1. 상품 정보 검색
 void searchClotingHelper(){
-    string name;
-    in_fp >> name;
+    string goodsname;
+    in_fp >> goodsname;
     SearchAndPurchaseClothingUI::startInterface()
 }
 //5.1. 판매 상품 통계
