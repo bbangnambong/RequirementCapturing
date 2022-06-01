@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include<list>
 
 // 상수 선언
 #define MAX_STRING 32
@@ -178,7 +179,10 @@ public:
 // 변수 선언
 ifstream in_fp;
 ofstream out_fp;
-MemberInfo members[MAX_MEMBER];
+list<MemberInfo> memberList;
+list<MemberInfo>::iterator iter=memberList.begin();
+int count = 0;
+
 int memberNum = 0;
 MemberInfo *currentMember;
 string clothingName;
@@ -359,7 +363,7 @@ void doTask(){
           }
           case 2:
           {
-             // deleteID();
+            deleteID();
             break;
           }
         }
@@ -370,10 +374,12 @@ void doTask(){
           {
             case 1:   
             {
+              login();
               break;
             }
             case 2:
             {
+              logout();
               break;
             }
           }
@@ -457,28 +463,55 @@ void join(){
   fscanf(in_fp, "%s %s %s %s", name, SSN, ID, password);
 
    // 해당 기능 수행
-  currentMember->setUserInfo(name, SSN, ID, password);
+  if (count > MAX_MEMBER) {
+      currentMember->setUserInfo(name, SSN, ID, password);
+      memberList.push_back(currentMember);
+      count++;
+      fprintf(out_fp, "1.1. 회원가입\n");
+      fprintf(out_fp, "%s %s %s %s\n", name, SSN, ID, password);
+  }
+  else {
+      fprintf(out_fp, "1.1. 회원가입\n");
+      fprintf(out_fp, "회원가입불가\n");
+  }
 
    // 출력 형식
-  fprintf(out_fp, "1.1. 회원가입\n");
-  fprintf(out_fp, "%s %s %s %s\n", name, SSN, ID, password);
+  //fprintf(out_fp, "1.1. 회원가입\n");
+  //fprintf(out_fp, "%s %s %s %s\n", name, SSN, ID, password);
 }
 
 
 //1.2 회원탈퇴
 void deleteID() {
-    delete currentMember;
+    fprintf(out_fp, "1.2 회원탈퇴\n");
+    fprintf(out_fp, "%s\n", currentMember->getID());
+    memberList.erase(currentMember);
+    count--;
 }
 
 //2.1 로그인
 void login() {
     char ID[MAX_STRING], password[MAX_STRING];
     fscanf(in_fp, "%s %s",ID, password);
-
-    if (currentMember->checkID(ID, password)) {
-
+    while(true) {
+        currentMember = iter;
+        if (currentMember->checkID()) {
+            fprintf(out_fp, "2.1. 로그인\n");
+            fprintf(out_fp, "%s,%s\n", currentMember->getID(),currentMember->getPassword());
+            break;
+        }
+        if (iter == memberList.end()) {
+            fprintf(out_fp, "2.1 로그인\n");
+            fprintf(out_fp, "로그인 실패\n");
+            break;
+        }
+        iter++
     }
-
+}
+//2.2 로그아웃
+void logout() {
+    fprintf(out_fp, "2.2 로그아웃\n");
+    fprintf(out_fp, "%s\n",currentMember->getID());
 }
 
 //3.1. 의류 등록
