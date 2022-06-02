@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+
+
 // 상수 선언
 #define MAX_STRING 32
 #define MAX_MEMBER 10
@@ -119,7 +121,7 @@ class Clothing {
     int soldNum;
     int sumOfRating;  // 구매 만족도의 합
     float avgRate;
-    int numOfRating;
+    int numOfRating; // 상품 평가 횟수
 
    public:
     Clothing() {
@@ -144,7 +146,7 @@ class Clothing {
         sumOfRating = 0;
         numOfRating = 0;
     }
-    // 총 구매 횟수, 구매 만족도 평가에 사용
+    
     string getClothingDetails() {
         return name + " " + manufacturer + " " + to_string(price) + " " + to_string(stock);
     };
@@ -425,7 +427,7 @@ class ShowPurchaseHistroyUI {
 };
 class ShowPurchaseHistroy {
    public:
-    static void showpurchasedClothings() {
+    static void showPurchasedClothings() {
         out_fp << "4.3. 상품 구매 내역 조회" << '\n';
         vector<int> purchasedClothingsList = currentMember->listPurchasedClothings();
         // cout << purchasedClothingsList.size() << endl;
@@ -549,7 +551,7 @@ void doTask() {
                         break;
                     }
                     case 3: {
-                        ShowPurchaseHistroy::showpurchasedClothings();
+                        ShowPurchaseHistroy::showPurchasedClothings();
                         break;
                     }
                     case 4: {

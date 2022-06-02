@@ -644,7 +644,7 @@
 															"top": 55,
 															"width": 119,
 															"height": 13,
-															"text": ":UserInfoSeeting"
+															"text": ":SignUp"
 														},
 														{
 															"_type": "LabelView",
@@ -1529,7 +1529,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGA0zxnaPUt7GA="
 									},
-									"name": ":UserInfoSeeting",
+									"name": ":SignUp",
 									"represent": {
 										"$ref": "AAAAAAGA005sXPmERrM="
 									},

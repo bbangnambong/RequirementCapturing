@@ -46,7 +46,7 @@
 											"font": "Arial;13;0",
 											"left": 32.72998046875,
 											"top": 13,
-											"width": 75.693603515625,
+											"width": 86.2236328125,
 											"height": 13,
 											"text": "판매 통계 조회"
 										},
@@ -410,7 +410,7 @@
 													"top": 479,
 													"width": 182,
 													"height": 13,
-													"text": ":PurchasedClothing"
+													"text": ":Clothing"
 												},
 												{
 													"_type": "LabelView",
@@ -2428,7 +2428,7 @@
 													"font": "Arial;13;0",
 													"left": -232,
 													"top": -320,
-													"width": 106.20263671875,
+													"width": 110.24609375,
 													"height": 13,
 													"text": "(from Interaction1)"
 												},
@@ -2580,7 +2580,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGAwlxAke/dedM="
 							},
-							"name": ":PurchasedClothing",
+							"name": ":Clothing",
 							"represent": {
 								"$ref": "AAAAAAGAwmC+nPBZFFY="
 							},
