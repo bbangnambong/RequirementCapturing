@@ -4,8 +4,6 @@
 #include <string>
 #include <vector>
 
-
-
 // 상수 선언
 #define MAX_STRING 32
 #define MAX_MEMBER 10
@@ -55,7 +53,7 @@ class MemberInfo {
         return securityNumber;
     }
     string getID() {
-       return id;
+        return id;
     }
     string getPassword() {
         return password;
@@ -121,7 +119,7 @@ class Clothing {
     int soldNum;
     int sumOfRating;  // 구매 만족도의 합
     float avgRate;
-    int numOfRating; // 상품 평가 횟수
+    int numOfRating;  // 상품 평가 횟수
 
    public:
     Clothing() {
@@ -146,7 +144,7 @@ class Clothing {
         sumOfRating = 0;
         numOfRating = 0;
     }
-    
+
     string getClothingDetails() {
         return name + " " + manufacturer + " " + to_string(price) + " " + to_string(stock);
     };
@@ -264,40 +262,41 @@ string clothingName;
 int search_index = 0;  // 검색 결과 인덱스 저장
 
 // 1.1. 회원가입
-class SignUpUI{
-public:
-    static string setName(){
+class SignUpUI {
+   public:
+    static string setName() {
         string name;
-        in_fp>>name;
+        in_fp >> name;
         return name;
     }
-    static string setSSN(){
+    static string setSSN() {
         string SSN;
-        in_fp>>SSN;
+        in_fp >> SSN;
         return SSN;
     }
-    static string setID(){
+    static string setID() {
         string ID;
-        in_fp>>ID;
+        in_fp >> ID;
         return ID;
     }
-    static string setPassword(){
+    static string setPassword() {
         string password;
-        in_fp>>password;
+        in_fp >> password;
         return password;
     }
-    static void printMemberInfo(){
+    static void printMemberInfo() {
         if (memberCount < MAX_MEMBER) {
             // currentMember->setUserInfo(name, SSN, ID, password);
             // SignUp::signUp(name, SSN, ID, password);
             out_fp << "1.1. 회원가입\n";
-            out_fp<< "> " << memberList.back().getName() << " " << memberList.back().getSecurityNumber() << " "
-            <<memberList.back().getID() << " " << memberList.back().getPassword() << "\n";
-            out_fp<<'\n';
+            out_fp << "> " << memberList.back().getName() << " " << memberList.back().getSecurityNumber() << " "
+                   << memberList.back().getID() << " " << memberList.back().getPassword() << "\n";
+            out_fp << '\n';
         } else {
             out_fp << "1.1. 회원가입\n";
-            out_fp<< "> " << "회원가입불가\n";
-            out_fp<<'\n';
+            out_fp << "> "
+                   << "회원가입불가\n";
+            out_fp << '\n';
         }
     }
 };
@@ -305,10 +304,10 @@ public:
 class SignUp {
    public:
     static void signUp() {
-        string name=SignUpUI::setName();
-        string SSN=SignUpUI::setSSN();
-        string ID=SignUpUI::setID();
-        string password=SignUpUI::setPassword();
+        string name = SignUpUI::setName();
+        string SSN = SignUpUI::setSSN();
+        string ID = SignUpUI::setID();
+        string password = SignUpUI::setPassword();
         MemberInfo tempMember = MemberInfo(name, SSN, ID, password);
         memberList.push_back(tempMember);
         memberCount++;
@@ -317,12 +316,12 @@ class SignUp {
 };
 
 // 1.2. 회원탈퇴
-class DeleteIDUI{
-public:
-    static void startInterface(){
-     out_fp << "1.2 회원탈퇴\n";
-     out_fp << "> "<< currentMember->getID() << "\n", currentMember->getID();
-     out_fp<<'\n';
+class DeleteIDUI {
+   public:
+    static void startInterface() {
+        out_fp << "1.2 회원탈퇴\n";
+        out_fp << "> " << currentMember->getID() << "\n";
+        out_fp << '\n';
     }
 };
 class DeleteID {
@@ -343,14 +342,15 @@ class LogIn {
         while (true) {
             if (i == memberList.size()) {
                 out_fp << "2.1 로그인\n";
-                out_fp << "> " <<"로그인 실패\n";
-                out_fp<<'\n';
+                out_fp << "> "
+                       << "로그인 실패\n";
+                out_fp << '\n';
                 break;
             }
             if (memberList[i].checkID(ID, password)) {
                 out_fp << "2.1. 로그인\n";
-                out_fp << "> "<< memberList[i].getID() << " " << memberList[i].getPassword() << "\n";
-                out_fp<<'\n';
+                out_fp << "> " << memberList[i].getID() << " " << memberList[i].getPassword() << "\n";
+                out_fp << '\n';
                 currentMember = &memberList[i];
                 break;
             }
@@ -440,8 +440,8 @@ class SearchAndPurchaseClothing {
         int size = clothingNum;
         for (int i = 0; i < size; i++) {
             if (name == clothingList[i].getName()) {
-                out_fp << "> "<< clothingList[i].clothingDetailsToUser();
-                out_fp<<'\n';
+                out_fp << "> " << clothingList[i].clothingDetailsToUser();
+                out_fp << '\n';
                 search_index = i;
             }
         }
@@ -449,8 +449,8 @@ class SearchAndPurchaseClothing {
     static void purchaseClothing() {
         string sellerID = clothingList[search_index].getSellerID();
         out_fp << "4.2. 상품 구매" << '\n';
-        out_fp << "> "<< sellerID << " " << clothingList[search_index].getName() << "\n";
-        out_fp<<'\n';
+        out_fp << "> " << sellerID << " " << clothingList[search_index].getName() << "\n";
+        out_fp << '\n';
         currentMember->addPurchasedClothing(search_index);
         clothingList[search_index].sold();
         if (clothingList[search_index].getStock() == 0) {
@@ -488,9 +488,9 @@ class ShowPurchaseHistroy {
         vector<int> purchasedClothingsList = currentMember->listPurchasedClothings();
         // cout << purchasedClothingsList.size() << endl;
         for (int i = 0; i < purchasedClothingsList.size(); i++) {
-            int idx = purchasedClothingsList[i];                  // 구매한 의류의 인덱스를 가져와서
-            out_fp<<"> " << clothingList[idx].clothingDetailsToUser();  // 출력한다.
-            out_fp<<'\n';
+            int idx = purchasedClothingsList[i];                          // 구매한 의류의 인덱스를 가져와서
+            out_fp << "> " << clothingList[idx].clothingDetailsToUser();  // 출력한다.
+            out_fp << '\n';
             break;
         }
     }
@@ -503,8 +503,8 @@ class ShowPurchaseHistroy {
         for (int i = 0; i < size; i++) {
             if (goodsName == clothingList[i].getName()) {
                 clothingList[i].setSumOfRating(stoi(goodsRating));  // 구매만족도 더함, 평균 변경함
-                out_fp << "> "<< clothingList[i].getSellerID() << " " << goodsName << " " << to_string(clothingList[i].getAvgRate()).substr(0, 3) << '\n';
-                out_fp<<'\n';
+                out_fp << "> " << clothingList[i].getSellerID() << " " << goodsName << " " << to_string(clothingList[i].getAvgRate()).substr(0, 3) << '\n';
+                out_fp << '\n';
                 break;
             }
         }
@@ -626,6 +626,7 @@ void doTask() {
                         break;
                     }
                 }
+                break;
             }
             case 6: {
                 switch (menu_level_2) {
@@ -653,23 +654,21 @@ void join() {
     // 해당 기능 수행
     if (memberCount < MAX_MEMBER) {
         // currentMember->setUserInfo(name, SSN, ID, password);
-       // SignUp::signUp(name, SSN, ID, password);
+        // SignUp::signUp(name, SSN, ID, password);
         out_fp << "1.1. 회원가입\n";
-        out_fp<< "> " << name << " " << SSN << " " << ID << " " << password << "\n";
-        out_fp<<'\n';
+        out_fp << "> " << name << " " << SSN << " " << ID << " " << password << "\n";
+        out_fp << '\n';
     } else {
         out_fp << "1.1. 회원가입\n";
-        out_fp<< "> " << "회원가입불가\n";
-        out_fp<<'\n';
+        out_fp << "> "
+               << "회원가입불가\n";
+        out_fp << '\n';
     }
 }
 
 // 1.2 회원탈퇴
 void deleteID() {
     DeleteID::deleteId();
-    out_fp << "1.2 회원탈퇴\n";
-    out_fp << "> "<< currentMember->getID() << "\n", currentMember->getID();
-    out_fp<<'\n';
 }
 
 // 2.1 로그인
@@ -682,8 +681,8 @@ void login() {
 // 2.2 로그아웃
 void logout() {
     out_fp << "2.2 로그아웃\n";
-    out_fp << "> "<< currentMember->getID() << "\n";
-    out_fp<<'\n';
+    out_fp << "> " << currentMember->getID() << "\n";
+    out_fp << '\n';
     LogOut::logOut();
 }
 
@@ -697,24 +696,24 @@ void createNewClothingHelper() {
     AddClothingUI::createNewClothing(name, manufacturer, price, stock);
     // 출력
     out_fp << "3.1. 판매 의류 등록\n"
-            << "> " << name << " " << manufacturer << " " << price << " " << stock << "\n";
-    out_fp<<'\n';
+           << "> " << name << " " << manufacturer << " " << price << " " << stock << "\n";
+    out_fp << '\n';
 }
 
 // 3.2. 판매중 의류 조회
 void showSellingsHelper() {
     string sellingList = ShowSellings::showSellings();
     out_fp << "3.2. 등록 상품 조회\n"
-            << "> " << sellingList;
-    out_fp<<'\n';
+           << "> " << sellingList;
+    out_fp << '\n';
 }
 
 // 3.3. 판매완료 의류 조회
 void soldoutSellingsHelper() {
     string soldoutList = ShowSoldouts::showSoldouts();
     out_fp << "3.3. 판매 완료 상품 조회\n"
-            << "> " << soldoutList;
-    out_fp<<'\n';
+           << "> " << soldoutList;
+    out_fp << '\n';
 }
 // 4.1. 상품 정보 검색
 // void searchClotingHelper() {
@@ -726,8 +725,8 @@ void soldoutSellingsHelper() {
 void showSellingSumHelper() {
     string sumList = ShowSellingSum::showSellingSum();
     out_fp << "5.1. 판매 상품 통계\n"
-            << "> " << sumList;
-    out_fp<<'\n';
+           << "> " << sumList;
+    out_fp << '\n';
 }
 void program_exit() {
 }
