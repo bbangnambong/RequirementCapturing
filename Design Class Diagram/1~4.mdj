@@ -63,7 +63,7 @@
 											"top": 108,
 											"width": 183,
 											"height": 13,
-											"text": "LoginInterface::SignUpUI"
+											"text": "SignUpUI"
 										},
 										{
 											"_type": "LabelView",
@@ -255,7 +255,7 @@
 											"top": 116,
 											"width": 151.65185546875,
 											"height": 13,
-											"text": "Control::UserInfoSetting"
+											"text": "UserInfoSetting"
 										},
 										{
 											"_type": "LabelView",
@@ -265,7 +265,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 73.67724609375,
+											"width": 77.9365234375,
 											"height": 13,
 											"text": "(from Model)"
 										},
@@ -455,7 +455,7 @@
 											"font": "Arial;13;0",
 											"left": -112,
 											"top": -192,
-											"width": 73.67724609375,
+											"width": 77.9365234375,
 											"height": 13,
 											"text": "(from Model)"
 										},
@@ -515,7 +515,7 @@
 											"top": 299,
 											"width": 158,
 											"height": 13,
-											"text": "-name",
+											"text": "-name: string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -532,7 +532,7 @@
 											"top": 314,
 											"width": 158,
 											"height": 13,
-											"text": "-securityNumber",
+											"text": "-securityNumber: string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -549,7 +549,7 @@
 											"top": 329,
 											"width": 158,
 											"height": 13,
-											"text": "-id",
+											"text": "-id: string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -566,7 +566,7 @@
 											"top": 344,
 											"width": 158,
 											"height": 13,
-											"text": "-password",
+											"text": "-password: string",
 											"horizontalAlignment": 0
 										}
 									],
@@ -595,6 +595,7 @@
 											"model": {
 												"$ref": "AAAAAAGA2Ixv6RbiV48="
 											},
+											"visible": false,
 											"font": "Arial;13;0",
 											"left": 85,
 											"top": 367,
@@ -614,7 +615,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 85,
-											"top": 382,
+											"top": 369,
 											"width": 158,
 											"height": 13,
 											"text": "+deleteID()",
@@ -625,7 +626,7 @@
 									"left": 80,
 									"top": 362,
 									"width": 168,
-									"height": 38
+									"height": 25
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -726,7 +727,7 @@
 											"top": 276,
 											"width": 146.59912109375,
 											"height": 13,
-											"text": "LoginInterface::LoginUI"
+											"text": "LoginUI"
 										},
 										{
 											"_type": "LabelView",
@@ -737,7 +738,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -80,
-											"width": 73.67724609375,
+											"width": 77.9365234375,
 											"height": 13,
 											"text": "(from Model)"
 										},
@@ -918,7 +919,7 @@
 											"top": 460,
 											"width": 151.65185546875,
 											"height": 13,
-											"text": "Control::CheckingID"
+											"text": "CheckingID"
 										},
 										{
 											"_type": "LabelView",
@@ -930,7 +931,7 @@
 											"font": "Arial;13;0",
 											"left": -64,
 											"top": 16,
-											"width": 73.67724609375,
+											"width": 77.9365234375,
 											"height": 13,
 											"text": "(from Model)"
 										},
@@ -1114,7 +1115,7 @@
 											"top": 460,
 											"width": 143,
 											"height": 13,
-											"text": "Control::Logout"
+											"text": "Logout"
 										},
 										{
 											"_type": "LabelView",
@@ -1125,7 +1126,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -16,
-											"width": 73.67724609375,
+											"width": 77.9365234375,
 											"height": 13,
 											"text": "(from Model)"
 										},
@@ -1270,7 +1271,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "LoginInterface::SignUpUI",
+					"name": "SignUpUI",
 					"stereotype": "boundary",
 					"operations": [
 						{
@@ -1289,7 +1290,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Control::UserInfoSetting",
+					"name": "UserInfoSetting",
 					"stereotype": "control",
 					"operations": [
 						{
@@ -1319,7 +1320,7 @@
 							},
 							"name": "name",
 							"visibility": "private",
-							"type": ""
+							"type": "string"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -1329,7 +1330,7 @@
 							},
 							"name": "securityNumber",
 							"visibility": "private",
-							"type": ""
+							"type": "string"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -1339,7 +1340,7 @@
 							},
 							"name": "id",
 							"visibility": "private",
-							"type": ""
+							"type": "string"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -1349,7 +1350,7 @@
 							},
 							"name": "password",
 							"visibility": "private",
-							"type": ""
+							"type": "string"
 						}
 					],
 					"operations": [
@@ -1377,7 +1378,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "LoginInterface::LoginUI",
+					"name": "LoginUI",
 					"stereotype": "boundary",
 					"operations": [
 						{
@@ -1396,7 +1397,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Control::CheckingID",
+					"name": "CheckingID",
 					"stereotype": "control",
 					"operations": [
 						{
@@ -1415,7 +1416,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Control::Logout",
+					"name": "Logout",
 					"stereotype": "control",
 					"operations": [
 						{
